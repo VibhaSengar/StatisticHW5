@@ -1,0 +1,2 @@
+updateBarChart(histogram1, chartData1, numAttacks);
+updateBarChart(histogram2, chartData2, attackToAnalyze);

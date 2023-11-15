@@ -1,0 +1,64 @@
+function createBarChart(canvas) {
+    const chartData = {
+        labels: [],
+        datasets: [],
+    };
+ 
+    return new Chart(canvas.getContext("2d"), {
+        type: "bar", // Use horizontal bar chart
+        data: chartData,
+        options: {
+            indexAxis: "y", // Display the y-axis horizontally
+            scales: {
+                x: {
+                    beginAtZero: true,
+                },
+            },
+            plugins: {
+                legend: {
+                    display: false,
+                },
+            },
+        },
+    });
+}
+ 
+function updateBarChart(chart, data, x) {
+    
+    const scoresAtLastAttack = data.map((values) => values.slice(0, x));
+    
+    const scoreCounts = {};
+    for (let i = 0; i < scoresAtLastAttack.length; i++) {
+        const scores = scoresAtLastAttack[i];
+        for (let j = 0; j < scores.length; j++) {
+            const score = scores[j];
+            if (scoreCounts[score] === undefined) {
+                scoreCounts[score] = 0;
+            }
+            scoreCounts[score] += 1;
+        }
+    }
+    
+    const scoreCountsArray = Object.keys(scoreCounts).map((score) => ({
+        score: parseInt(score),
+        count: scoreCounts[score],
+    }));
+    scoreCountsArray.sort((a, b) => b.score - a.score);
+    
+    const scores = [];
+    const counts = [];
+    for (let i = 0; i < scoreCountsArray.length; i++) {
+        const scoreCount = scoreCountsArray[i];
+        scores.push(scoreCount.score);
+        counts.push(scoreCount.count);
+    }
+    // Update the chart
+    chart.data.labels = scores;
+    chart.data.datasets = [
+        {
+            data: counts,
+        },
+    ];
+ 
+    chart.update();
+}

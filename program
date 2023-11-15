@@ -1,0 +1,29 @@
+
+const probab = lambda * size;
+    // Represent each of the M servers in the simulation by drawing a line that jumps by one at each instance of an attack. 
+    //Represent each of the M servers in the simulation by drawing a line that jumps by one at each attack event
+
+function createtheChart(canvas) {
+    const chartData = {
+        labels: [],
+        datasets: [],
+    };
+ 
+    return new Chart(canvas.getContext("2d"), {
+        type: "line",
+        data: chartData,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
+            },
+            plugins: {
+                legend: {
+                    display: false,
+                },
+            },
+        },
+    });
+}
+

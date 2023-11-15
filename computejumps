@@ -1,0 +1,21 @@
+function computejump(numSystems, numAttacks, penetrationProbability) {
+ 
+    const values = {
+        jumps: [],
+    };
+ 
+    // let's go
+    for (let systemIndex = 0; systemIndex < numSystems; systemIndex++) {
+         
+        for (let attack = 1; attack <= numAttacks; attack++) {
+ 
+            if (Math.random() > penetrationProbability) {
+                jump += 1;
+            }
+        }
+ 
+        values.jumps.push(jump);
+    }
+ 
+    return values;
+}
